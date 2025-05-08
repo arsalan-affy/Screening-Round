@@ -20,7 +20,7 @@ const TestQuestions = () => {
   const [answers, setAnswers] = useState([]);
   const chunksRef = useRef([]);
   const [submittingAudio, setSubmittingAudio] = useState(false);
-
+  const [audioSubmitted, setAudioSubmitted] = useState(false);
   const currentQuestion = questions[currentQuestionIndex];
 
   const fetchQuestions = async () => {
@@ -234,7 +234,7 @@ const TestQuestions = () => {
 
       await axios.post(SUBMIT_TEST, payload);
       toast.success("Test submitted successfully!");
-      navigate(`thank-you/${candidateId}`);
+      navigate(`/thank-you/${candidateId}`);
     } catch (error) {
       console.error("Submit test error:", error);
       toast.error("Failed to submit test.");
