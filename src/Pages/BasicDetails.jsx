@@ -109,10 +109,10 @@ const BasicDetails = () => {
           </div>
         </form>
 
-        <div className="text-center pt-4">
+        <div className="text-center pt-4 w-fit m-auto">
           <button
             onClick={handleContinue}
-            className="bg-zinc-900 cursor-pointer hover:bg-zinc-950 text-white text-lg font-semibold px-6 py-1.5 rounded-full shadow-md transition duration-300"
+            className="bg-blue-700 hover:bg-green-700 text-white text-base font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 flex items-center justify-center gap-2"
           >
             Continue
           </button>

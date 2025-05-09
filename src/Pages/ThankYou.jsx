@@ -22,15 +22,40 @@ const ThankYou = () => {
   const [scoreIcon, setScoreIcon] = useState(null);
   const [quote, setQuote] = useState("");
   const [countdown, setCountdown] = useState(30);
-  const [showResult, setShowResult] = useState(false); // Delay 10s for AI message
+  const [showResult, setShowResult] = useState(false);
+
+  // useEffect(() => {
+  //   const waitTimer = setTimeout(() => {
+  //     setShowResult(true);
+  //     fetchCandidateDetails();
+  //   }, 5000);
+
+  //   return () => clearTimeout(waitTimer);
+  // }, [candidateId]);
+  const messages = [
+    "analyzes your expressions",
+    "scores your confidence level",
+    "evaluates your communication skills",
+    "checks your response relevance",
+    "prepares your result",
+  ];
+
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   useEffect(() => {
     const waitTimer = setTimeout(() => {
       setShowResult(true);
       fetchCandidateDetails();
-    }, 5000);
+    }, 10000);
 
-    return () => clearTimeout(waitTimer);
+    const rotateTimer = setInterval(() => {
+      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
+    }, 2000);
+
+    return () => {
+      clearTimeout(waitTimer);
+      clearInterval(rotateTimer);
+    };
   }, [candidateId]);
 
   useEffect(() => {
@@ -114,12 +139,17 @@ const ThankYou = () => {
       <div className="bg-white shadow-2xl rounded-2xl max-w-2xl w-full p-6 md:p-10 space-y-6 relative">
         {!showResult ? (
           <div className="text-center text-gray-600">
-            <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="flex flex-col items-center justify-center space-y-3">
               <div className="relative flex items-center justify-center">
-                <PiRobotDuotone className="text-6xl text-blue-600 drop-shadow-sm" />
+                <PiRobotDuotone className="text-7xl text-blue-600 drop-shadow-sm animate-bounce" />
               </div>
-              <p className="text-sm md:text-base font-medium animate-pulse">
-                Please wait while the AI generates your result...
+
+              <p className="text-base md:text-lg font-semibold text-zinc-800 dark:text-black">
+                Our AI is analyzing your response
+              </p>
+
+              <p className="text-sm md:text-base font-medium text-blue-700 animate-pulse px-6 italic">
+                {messages[currentMessageIndex]}...
               </p>
             </div>
           </div>
@@ -128,29 +158,36 @@ const ThankYou = () => {
             <h2 className="text-3xl font-semibold text-gray-800">
               Thank You, {candidateData.name}!
             </h2>
-            <p className="text-lg text-gray-600">Your score is:</p>
-            <div className="text-6xl font-bold text-gray-800">
-              {candidateData.score}%
-            </div>
-            <div className={`text-2xl font-semibold ${scoreLevel?.color} mt-2`}>
-              {scoreLevel?.level}
-            </div>
-            <div className="flex justify-center mt-4">
-              <div className="text-6xl">{scoreIcon}</div>
-            </div>
+
+            {/* <p className="text-lg text-gray-600">Your score is:</p>
+  <div className="text-6xl font-bold text-gray-800">
+    {candidateData.score}%
+  </div>
+  <div className={`text-2xl font-semibold ${scoreLevel?.color} mt-2`}>
+    {scoreLevel?.level}
+  </div>
+  <div className="flex justify-center mt-4">
+    <div className="text-6xl">{scoreIcon}</div>
+  </div> */}
+
             <div className="mt-6 text-lg text-gray-600">
-              <p className="italic">"{quote}"</p>
+              <p>
+                Thank you for completing the screening. Our team will review
+                your submission and get back to you shortly.
+              </p>
             </div>
+
             <p className="text-sm text-gray-500 mt-4">
               You will be redirected automatically in{" "}
               <span className="font-semibold">{countdown}</span> second
               {countdown !== 1 ? "s" : ""}.
             </p>
+
             <button
               onClick={() => navigate("/")}
               className="mt-4 bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded transition duration-200"
             >
-              Exit Now
+              Exit
             </button>
           </div>
         ) : (

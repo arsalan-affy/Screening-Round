@@ -1,6 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaClock, FaBan, FaListOl, FaVideo, FaEye, FaPlayCircle } from "react-icons/fa";
+import {
+  FaClock,
+  FaBan,
+  FaListOl,
+  FaVideo,
+  FaEye,
+  FaPlayCircle,
+} from "react-icons/fa";
 
 const Instructions = () => {
   const navigate = useNavigate();
@@ -21,11 +28,19 @@ const Instructions = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-blue-200 to-blue-300 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center flex-col px-4 py-10">
-      <h1 className="text-3xl font-semibold text-center text-zinc-900 dark:text-white mb-10">
-        Affy Cloud AI Screening Round
-      </h1>
-
       <div className="bg-white dark:bg-gray-900 shadow-2xl rounded-3xl max-w-2xl w-full p-8 md:p-10 space-y-8">
+        <div className="flex justify-center mb-0">
+          <img
+            src="https://affycloudsolution.com/static/media/affy_logo.7354960bda008279c013.png"
+            alt="Affy Cloud Logo"
+            className="w-24 h-auto mb-4"
+          />
+        </div>
+
+        <h1 className="text-3xl font-semibold text-center text-zinc-900 dark:text-white">
+          AI Screening Round
+        </h1>
+
         <h3 className="text-xl md:text-2xl font-semibold text-center text-zinc-900 dark:text-white">
           Please read the instructions carefully:
         </h3>
@@ -79,11 +94,13 @@ const Instructions = () => {
           </div>
         </div>
 
-        <div className="text-center pt-4">
+        {/* Start Button */}
+        <div className="text-center pt-4 w-fit m-auto">
           <button
             onClick={handleNext}
-            className="bg-zinc-900 hover:bg-zinc-950 text-white text-base font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300"
+            className="bg-blue-700 hover:bg-green-700 text-white text-base font-semibold px-6 py-3 rounded-full shadow-lg transition duration-300 flex items-center justify-center gap-2"
           >
+            <FaPlayCircle className="text-lg" />
             Start Test
           </button>
         </div>

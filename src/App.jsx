@@ -5,6 +5,7 @@ import Instructions from "./Pages/Instructions";
 import TestQuestions from "./Pages/TestQuestios";
 import ThankYou from "./Pages/ThankYou";
 import Disqualified from "./Pages/Disqualified";
+import AllCandidates from "./Pages/AllCandidates";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ const AppRoutes = () => {
       <Route path="/test-questions/:candidateId" element={<TestQuestions />} />
       <Route path="/thank-you/:candidateId" element={<ThankYou />} />
       <Route path="/disqualified" element={<Disqualified />} />
+      <Route path="admin/candidates/get-all/affycloud" element={<AllCandidates />} />
     </Routes>
   );
 };
